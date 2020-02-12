@@ -5,7 +5,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import main.converter.converter;
+import main.converter.Converter;
 import java.time.format.DateTimeFormatter;
 
 
@@ -23,7 +23,7 @@ public class Controller {
 
 
     public void buttonClick(ActionEvent actionEvent) {
-
+        welcomeLabel.setText("nichego");
         if (checkField()) {
             String[] unparsedData = {textMsisdn.getText(),
                     textMsisdnB.getText(),
@@ -33,15 +33,21 @@ public class Controller {
                     String.valueOf(chPlusMinute.isSelected()),
                     String.valueOf(chUrgency.isSelected())};
 
-            converter convert = new converter();
+            Converter convert = new Converter();
             convert.convert(unparsedData, welcomeLabel);
         }
 
     }
 
     private boolean checkField() {
-
-        return true;
+        InputError error = CheckInput.Companion.checkField(textMsisdn, textMsisdnB,dateStarDate,textStartTime,textDuration);
+        if (error==InputError.NO_ERROR) {
+            return true;
+        }
+        else {
+            welcomeLabel.setText(error.getTextError());
+            return false;
+        }
     }
 
 }

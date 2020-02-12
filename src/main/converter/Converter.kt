@@ -3,10 +3,10 @@ package main.converter
 import javafx.scene.control.Label
 
 
-class converter() {
+class Converter() {
 
     fun convert (unparsedData: Array<String>, label: Label) {
-
+        label.text = "asasd"
     }
 
 }

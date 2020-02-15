@@ -6,6 +6,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import main.converter.Converter;
+import main.checkInput.*;
 import java.time.format.DateTimeFormatter;
 
 
@@ -21,9 +22,7 @@ public class Controller {
     public CheckBox chPlusMinute;
     public CheckBox chUrgency;
 
-
     public void buttonClick(ActionEvent actionEvent) {
-        welcomeLabel.setText("nichego");
         if (checkField()) {
             String[] unparsedData = {textMsisdn.getText(),
                     textMsisdnB.getText(),
@@ -36,7 +35,12 @@ public class Controller {
             Converter convert = new Converter();
             convert.convert(unparsedData, welcomeLabel);
         }
+    }
 
+    public void replaceDigit(){
+        ParceInputField.Companion.replaceDigit(textMsisdn);
+        ParceInputField.Companion.replaceDigit(textMsisdnB);
+        ParceInputField.Companion.replaceDigit(textDuration);
     }
 
     private boolean checkField() {

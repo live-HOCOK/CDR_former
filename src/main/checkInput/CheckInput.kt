@@ -1,8 +1,8 @@
-package main.gui
+package main.checkInput
 
 import javafx.scene.control.DatePicker
 import javafx.scene.control.TextField
-import main.gui.InputError.*
+import main.checkInput.InputError.*
 
 
 class CheckInput () {
@@ -16,15 +16,24 @@ class CheckInput () {
                 date.value == null -> return NO_DATE
                 time.text.isEmpty() -> return NO_TIME
                 duration.text.isEmpty() -> return NO_DURATION
-                !checkMsisdn(msisdn.text) -> return INCORRECT_MSISDN
+                checkMsisdn(msisdn.text) -> return INCORRECT_MSISDN
+                checkMsisdnB(msisdnB.text) -> return INCORRECT_MSISDN_B
+                checkStarTime(time.text) -> return INCORRECT_START_TIME
                 else -> return NO_ERROR
             }
         }
 
         fun checkMsisdn(msisdn: String): Boolean {
-            if (msisdn.length != 9) return false
-            //if (msisdn.contains(""))
-            return true
+            return msisdn.length != 9
+        }
+
+        fun checkMsisdnB(msisdnB: String): Boolean {
+            return msisdnB.length != 9 && msisdnB.length != 13
+        }
+
+        fun checkStarTime(startTime: String): Boolean{
+            val regex = "((^[0-1]\\d)|(^2[1-3]))[:,.,,,/][0-5]\\d([:,.,,,/][0-5]\\d)?$".toRegex()
+            return regex.find(startTime) == null
         }
     }
 }

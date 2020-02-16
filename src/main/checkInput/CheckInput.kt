@@ -3,11 +3,12 @@ package main.checkInput
 import javafx.scene.control.DatePicker
 import javafx.scene.control.TextField
 import main.checkInput.InputError.*
+import java.lang.RuntimeException
 
 
 class CheckInput () {
 
-
+    // проверка на возможные ошибки
     companion object {
         fun checkField(msisdn: TextField, msisdnB: TextField, date: DatePicker, time: TextField, duration: TextField): InputError {
             when {
@@ -19,12 +20,22 @@ class CheckInput () {
                 checkMsisdn(msisdn.text) -> return INCORRECT_MSISDN
                 checkMsisdnB(msisdnB.text) -> return INCORRECT_MSISDN_B
                 checkStarTime(time.text) -> return INCORRECT_START_TIME
+                checkMsisdnPrefix(msisdn.text) -> return INCORRECT_PREFIX
                 else -> return NO_ERROR
             }
         }
 
         fun checkMsisdn(msisdn: String): Boolean {
             return msisdn.length != 9
+        }
+
+        fun checkMsisdnPrefix(msisdn: String): Boolean {
+            return try {
+                FilialPrefix.valueOf(("P" + msisdn[0].toString() + msisdn[1].toString())) == null
+            } catch (e: RuntimeException){
+                true
+            }
+
         }
 
         fun checkMsisdnB(msisdnB: String): Boolean {

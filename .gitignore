@@ -24,7 +24,7 @@ hs_err_pid*
 
 # idea files
 .idea/
-.idea/workspace.xml
+out/
 
 # OS files
 .DS_Store

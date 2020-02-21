@@ -1,4 +1,4 @@
-package main.converter
+package converter;
 
 import javafx.scene.control.Label
 

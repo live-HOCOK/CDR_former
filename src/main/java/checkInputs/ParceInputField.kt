@@ -1,4 +1,4 @@
-package main.checkInput
+package checkInputs;
 
 import javafx.scene.control.TextField
 

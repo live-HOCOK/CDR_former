@@ -31,6 +31,7 @@ class Controller {
     lateinit var chUrgency: CheckBox
 
     // метод выполняющийся при нажатии на кнопку
+    @FXML
     fun buttonClick(actionEvent: ActionEvent?) { // выполняем проверку, если хорошо то передаем на конвертацию текста
         if (checkField()) {
             val unparsedData = arrayOf(
@@ -46,6 +47,7 @@ class Controller {
     }
 
     // ограничиваем ввод букв в некоторые поля
+    @FXML
     fun replaceDigit() {
         replaceDigit(textMsisdn)
         replaceDigit(textMsisdnB)

@@ -14,54 +14,54 @@ import java.time.format.DateTimeFormatter
 
 class Controller {
     @FXML
-    var textMsisdn: TextField? = null
+    lateinit var textMsisdn: TextField
     @FXML
-    var welcomeLabel: Label? = null
+    lateinit var welcomeLabel: Label
     @FXML
-    var textMsisdnB: TextField? = null
+    lateinit var textMsisdnB: TextField
     @FXML
-    var dateStarDate: DatePicker? = null
+    lateinit var dateStarDate: DatePicker
     @FXML
-    var textStartTime: TextField? = null
+    lateinit var textStartTime: TextField
     @FXML
-    var textDuration: TextField? = null
+    lateinit var textDuration: TextField
     @FXML
-    var chPlusMinute: CheckBox? = null
+    lateinit var chPlusMinute: CheckBox
     @FXML
-    var chUrgency: CheckBox? = null
+    lateinit var chUrgency: CheckBox
 
     // метод выполняющийся при нажатии на кнопку
     @FXML
     fun buttonClick(actionEvent: ActionEvent?) { // выполняем проверку, если хорошо то передаем на конвертацию текста
         if (checkField()) {
             val unparsedData = arrayOf(
-                textMsisdn!!.text,
-                textMsisdnB!!.text,
-                dateStarDate!!.value.format(DateTimeFormatter.ofPattern("dd.MM.YYYY")),
-                textStartTime!!.text,
-                textDuration!!.text, chPlusMinute!!.isSelected.toString(), chUrgency!!.isSelected.toString()
+                textMsisdn.text,
+                textMsisdnB.text,
+                dateStarDate.value.format(DateTimeFormatter.ofPattern("dd.MM.YYYY")),
+                textStartTime.text,
+                textDuration.text, chPlusMinute.isSelected.toString(), chUrgency.isSelected.toString()
             )
             val convert = Converter()
-            convert.convert(unparsedData, welcomeLabel!!)
+            convert.convert(unparsedData, welcomeLabel)
         }
     }
 
     // ограничиваем ввод букв в некоторые поля
     @FXML
     fun replaceDigit() {
-        replaceDigit(textMsisdn!!)
-        replaceDigit(textMsisdnB!!)
-        replaceDigit(textDuration!!)
+        replaceDigit(textMsisdn)
+        replaceDigit(textMsisdnB)
+        replaceDigit(textDuration)
     }
 
     // вызов проверки правильности введеной информации
     private fun checkField(): Boolean {
         val error =
-            checkField(textMsisdn!!, textMsisdnB!!, dateStarDate!!, textStartTime!!, textDuration!!)
+            checkField(textMsisdn, textMsisdnB, dateStarDate, textStartTime, textDuration)
         return if (error === InputError.NO_ERROR) {
             true
         } else { // вывод ошибки
-            welcomeLabel!!.text = error.textError
+            welcomeLabel.text = error.textError
             false
         }
     }

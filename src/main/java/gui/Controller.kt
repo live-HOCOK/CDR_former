@@ -5,6 +5,7 @@ import checkInputs.InputError
 import checkInputs.ParceInputField.Companion.replaceDigit
 import converter.Converter
 import javafx.event.ActionEvent
+import javafx.fxml.FXML
 import javafx.scene.control.CheckBox
 import javafx.scene.control.DatePicker
 import javafx.scene.control.Label
@@ -12,14 +13,23 @@ import javafx.scene.control.TextField
 import java.time.format.DateTimeFormatter
 
 class Controller {
-    var textMsisdn: TextField? = null
-    var welcomeLabel: Label? = null
-    var textMsisdnB: TextField? = null
-    var dateStarDate: DatePicker? = null
-    var textStartTime: TextField? = null
-    var textDuration: TextField? = null
-    var chPlusMinute: CheckBox? = null
-    var chUrgency: CheckBox? = null
+    @FXML
+    lateinit var textMsisdn: TextField
+    @FXML
+    lateinit var welcomeLabel: Label
+    @FXML
+    lateinit var textMsisdnB: TextField
+    @FXML
+    lateinit var dateStarDate: DatePicker
+    @FXML
+    lateinit var textStartTime: TextField
+    @FXML
+    lateinit var textDuration: TextField
+    @FXML
+    lateinit var chPlusMinute: CheckBox
+    @FXML
+    lateinit var chUrgency: CheckBox
+
     // метод выполняющийся при нажатии на кнопку
     fun buttonClick(actionEvent: ActionEvent?) { // выполняем проверку, если хорошо то передаем на конвертацию текста
         if (checkField()) {

@@ -3,7 +3,7 @@ package gui
 import checkInputs.CheckInput.Companion.checkField
 import checkInputs.InputError
 import checkInputs.ParceInputField.Companion.replaceDigit
-import converter.Converter
+import exporter.ExportToCSV
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.CheckBox
@@ -40,6 +40,8 @@ class Controller {
                     if (chUrgency.isSelected) "1," else "0," + if (chUrgency.isSelected) "1" else "0"
             //convert.arrayFormater(unparsedData, welcomeLabel)
             welcomeLabel.text = data
+            val export: ExportToCSV = ExportToCSV()
+            export.createCSV(data)
         }
     }
 

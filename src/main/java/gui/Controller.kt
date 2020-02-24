@@ -34,15 +34,12 @@ class Controller {
     @FXML
     fun buttonClick(actionEvent: ActionEvent?) { // выполняем проверку, если хорошо то передаем на конвертацию текста
         if (checkField()) {
-            val unparsedData = arrayOf(
-                textMsisdn.text,
-                textMsisdnB.text,
-                dateStarDate.value.format(DateTimeFormatter.ofPattern("dd.MM.YYYY")),
-                textStartTime.text,
-                textDuration.text, chPlusMinute.isSelected.toString(), chUrgency.isSelected.toString()
-            )
-            val convert = Converter()
-            convert.convert(unparsedData, welcomeLabel)
+            val data: String = "${textMsisdn.text},${textMsisdnB.text}," +
+                    dateStarDate.value.format(DateTimeFormatter.ofPattern("dd.MM.YYYY")) +
+                    ",${textStartTime.text},${textDuration.text},${if (chPlusMinute.isSelected) "1" else "0"}," +
+                    if (chUrgency.isSelected) "1," else "0," + if (chUrgency.isSelected) "1" else "0"
+            //convert.arrayFormater(unparsedData, welcomeLabel)
+            welcomeLabel.text = data
         }
     }
 

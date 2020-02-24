@@ -5,25 +5,15 @@ import javafx.scene.control.Label
 
 class Converter() {
 
-    fun convert(unparsedData: Array<String>, label: Label) {
-        label.text = "asasd"//?
+    fun arrayFormater (unparsedData: Array<String>, label: Label) {
+        var parsedData: String
 
+        parsedData = convertString(unparsedData)
+        label.text = parsedData
     }
 
     fun convertString(unparsedData: Array<String>): String {
-        var string = ""
-
-        for (s in unparsedData) {
-            var newS = ""
-            if (unparsedData.lastIndex != unparsedData.indexOf(s)) {
-                newS = s.plus(",")
-            } else {
-                string = string.plus(s)
-            }
-
-            string = string.plus(newS)
-        }
-        return string
+        return unparsedData.joinToString(",")
     }
 
 

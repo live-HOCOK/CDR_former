@@ -1,4 +1,4 @@
-package main.checkInput
+package checkInputs;
 
 enum class FilialPrefix(val prefix: String) {
 

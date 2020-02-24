@@ -1,4 +1,4 @@
-package main.checkInput
+package checkInputs;
 
 enum class InputError(val errCode: Int, val textError: String) {
 

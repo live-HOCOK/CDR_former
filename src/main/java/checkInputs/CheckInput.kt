@@ -1,8 +1,8 @@
-package main.checkInput
+package checkInputs;
 
 import javafx.scene.control.DatePicker
 import javafx.scene.control.TextField
-import main.checkInput.InputError.*
+import checkInputs.InputError.*
 import java.lang.RuntimeException
 
 

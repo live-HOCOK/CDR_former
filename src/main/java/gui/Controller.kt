@@ -71,12 +71,16 @@ class Controller {
         }
     }
 
-    private fun showOperatorDialog(): TextInputDialog {
+    private fun showOperatorDialog(): TextInputDialog? {
         val dialog = TextInputDialog()
         dialog.headerText = "Enter you name"
         val result = dialog.showAndWait()
         result.ifPresent { name: String -> setOperatorName(name) }
-        return dialog
+        if (result.isPresent) {
+            return dialog
+        } else {
+            return showOperatorDialog()
+        }
     }
 
     private fun setOperatorName(name: String) {

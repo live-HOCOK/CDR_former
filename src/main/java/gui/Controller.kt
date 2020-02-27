@@ -6,10 +6,8 @@ import checkInputs.ParceInputField.Companion.replaceDigit
 import exporter.ExportToCSV
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
-import javafx.scene.control.CheckBox
-import javafx.scene.control.DatePicker
-import javafx.scene.control.Label
-import javafx.scene.control.TextField
+import javafx.scene.control.*
+
 import java.time.format.DateTimeFormatter
 
 class Controller {

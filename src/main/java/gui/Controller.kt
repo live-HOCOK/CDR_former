@@ -2,8 +2,9 @@ package gui
 
 import checkInputs.CheckInput.Companion.checkField
 import checkInputs.InputError
-import checkInputs.ParceInputField.Companion.replaceDigit
+import checkInputs.ParceInputField
 import exporter.ExportToCSV
+import javafx.application.Platform
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.*
@@ -30,6 +31,8 @@ class Controller {
     @FXML
     lateinit var chUrgency: CheckBox
 
+    val parse = ParceInputField()
+
     // метод выполняющийся при нажатии на кнопку
     @FXML
     fun buttonClick(actionEvent: ActionEvent?) { // выполняем проверку, если хорошо то передаем на конвертацию текста
@@ -38,8 +41,7 @@ class Controller {
                     dateStarDate.value.format(DateTimeFormatter.ofPattern("dd.MM.YYYY")) +
                     ",${textStartTime.text},${textDuration.text},${if (chPlusMinute.isSelected) "1" else "0"}," +
                     if (chUrgency.isSelected) "1," else "0," + if (chUrgency.isSelected) "1" else "0"
-            //convert.arrayFormater(unparsedData, welcomeLabel)
-            welcomeLabel.text = data
+            welcomeLabel.text = data //debug
             val export = ExportToCSV()
             export.createCSV(data, operatorName.text)
         }
@@ -48,15 +50,26 @@ class Controller {
     // ограничиваем ввод букв в некоторые поля
     @FXML
     fun replaceDigit() {
-        replaceDigit(textMsisdn)
-        replaceDigit(textMsisdnB)
-        replaceDigit(textDuration)
+        parse.replaceDigit(textMsisdn)
+        parse.replaceDigit(textMsisdnB)
+        parse.replaceDigit(textDuration)
     }
 
     //данный метод запускается после загрузки fxml
     @FXML
     fun initialize() {
         showOperatorDialog()
+        //добавить лиснеры для полей
+        textStartTime.textProperty().addListener { observable, oldValue, newValue -> run {
+            val replaceValue : String = parse.parseTime(oldValue, newValue)
+            if (replaceValue != newValue)
+                Platform.runLater{ -> run {
+                    textStartTime.text = replaceValue
+                    textStartTime.positionCaret(textStartTime.text.length)
+                }
+        }
+
+        }}
     }
 
     // вызов проверки правильности введеной информации

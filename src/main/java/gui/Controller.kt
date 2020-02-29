@@ -2,7 +2,7 @@ package gui
 
 import checkInputs.CheckInput.Companion.checkField
 import checkInputs.InputError
-import checkInputs.ParceInputField
+import checkInputs.ParseInputField
 import exporter.ExportToCSV
 import javafx.application.Platform
 import javafx.event.ActionEvent
@@ -31,7 +31,7 @@ class Controller {
     @FXML
     lateinit var chUrgency: CheckBox
 
-    val parse = ParceInputField()
+    private val parse = ParseInputField()
 
     // метод выполняющийся при нажатии на кнопку
     @FXML
@@ -47,20 +47,12 @@ class Controller {
         }
     }
 
-    // ограничиваем ввод букв в некоторые поля
-    @FXML
-    fun replaceDigit() {
-        parse.replaceDigit(textMsisdn)
-        parse.replaceDigit(textMsisdnB)
-        parse.replaceDigit(textDuration)
-    }
-
     //данный метод запускается после загрузки fxml
     @FXML
     fun initialize() {
         showOperatorDialog()
         //добавить лиснеры для полей
-        textStartTime.textProperty().addListener { observable, oldValue, newValue -> run {
+        textStartTime.textProperty().addListener { _, oldValue, newValue -> run {
             val replaceValue : String = parse.parseTime(oldValue, newValue)
             if (replaceValue != newValue)
                 Platform.runLater{ -> run {
@@ -68,8 +60,22 @@ class Controller {
                     textStartTime.positionCaret(textStartTime.text.length)
                 }
         }
-
-        }}
+        } }
+        textMsisdn.textProperty().addListener { _, oldValue, newValue -> run {
+            var replaceValue: String = parse.replaceDigit(oldValue, newValue)
+            if (replaceValue != newValue)
+                textMsisdn.text = replaceValue
+        } }
+        textMsisdnB.textProperty().addListener { _, oldValue, newValue -> run {
+            var replaceValue: String = parse.replaceDigit(oldValue, newValue)
+            if (replaceValue != newValue)
+                textMsisdnB.text = replaceValue
+        } }
+        textDuration.textProperty().addListener { _, oldValue, newValue -> run {
+            var replaceValue: String = parse.replaceDigit(oldValue, newValue)
+            if (replaceValue != newValue)
+                textDuration.text = replaceValue
+        } }
     }
 
     // вызов проверки правильности введеной информации
@@ -97,7 +103,7 @@ class Controller {
     }
 
     private fun setOperatorName(name: String) {
-        if (!name.isEmpty()) {
+        if (name.isNotEmpty()) {
             operatorName.text = name
         } else {
             showOperatorDialog()

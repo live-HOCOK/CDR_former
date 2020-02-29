@@ -10,7 +10,7 @@
           alignment="center" hgap="10" vgap="10" >
 
     <Label GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="welcomeLabel"/>
-    <Label GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="operatorName"/>
+    <Label GridPane.rowIndex="1" GridPane.columnIndex="2" fx:id="operatorName"/>
     <TextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="textMsisdn" onKeyTyped="#replaceDigit"/>
     <TextField GridPane.rowIndex="2" GridPane.columnIndex="2" fx:id="textMsisdnB" onKeyTyped="#replaceDigit"/>
     <DatePicker GridPane.rowIndex="2" GridPane.columnIndex="3" fx:id="dateStarDate" editable="false"/>

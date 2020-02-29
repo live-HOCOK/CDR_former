@@ -4,8 +4,8 @@ class ParseInputField {
 
     fun replaceDigit(oldText: String, newText: String): String {
         when {
-            newText.length > oldText.length && newText.matches("^\\d+".toRegex()) -> return newText
-            newText.length > oldText.length -> return oldText
+            newText.length > oldText.length && newText.matches("^\\d+$".toRegex()) -> return newText
+            newText.length > oldText.length && !newText.matches("^\\d+$".toRegex())-> return oldText
         }
         return newText
     }

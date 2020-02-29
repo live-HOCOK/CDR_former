@@ -1,6 +1,6 @@
 package gui
 
-import checkInputs.CheckInput.Companion.checkField
+import checkInputs.CheckInput
 import checkInputs.InputError
 import checkInputs.ParseInputField
 import exporter.ExportToCSV
@@ -62,17 +62,17 @@ class Controller {
         }
         } }
         textMsisdn.textProperty().addListener { _, oldValue, newValue -> run {
-            var replaceValue: String = parse.replaceDigit(oldValue, newValue)
+            val replaceValue: String = parse.replaceDigit(oldValue, newValue)
             if (replaceValue != newValue)
                 textMsisdn.text = replaceValue
         } }
         textMsisdnB.textProperty().addListener { _, oldValue, newValue -> run {
-            var replaceValue: String = parse.replaceDigit(oldValue, newValue)
+            val replaceValue: String = parse.replaceDigit(oldValue, newValue)
             if (replaceValue != newValue)
                 textMsisdnB.text = replaceValue
         } }
         textDuration.textProperty().addListener { _, oldValue, newValue -> run {
-            var replaceValue: String = parse.replaceDigit(oldValue, newValue)
+            val replaceValue: String = parse.replaceDigit(oldValue, newValue)
             if (replaceValue != newValue)
                 textDuration.text = replaceValue
         } }
@@ -80,8 +80,9 @@ class Controller {
 
     // вызов проверки правильности введеной информации
     private fun checkField(): Boolean {
-        val error =
-            checkField(textMsisdn, textMsisdnB, dateStarDate, textStartTime, textDuration)
+        val checkInput = CheckInput()
+        val error: InputError =
+            checkInput.checkField(textMsisdn, textMsisdnB, dateStarDate, textStartTime, textDuration)
         return if (error === InputError.NO_ERROR) {
             true
         } else { // вывод ошибки
@@ -95,10 +96,10 @@ class Controller {
         dialog.headerText = "Enter you name"
         val result = dialog.showAndWait()
         result.ifPresent { name: String -> setOperatorName(name) }
-        if (result.isPresent) {
-            return dialog
+        return if (result.isPresent) {
+            dialog
         } else {
-            return showOperatorDialog()
+            showOperatorDialog()
         }
     }
 

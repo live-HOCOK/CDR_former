@@ -6,10 +6,8 @@ import checkInputs.ParceInputField.Companion.replaceDigit
 import exporter.ExportToCSV
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
-import javafx.scene.control.CheckBox
-import javafx.scene.control.DatePicker
-import javafx.scene.control.Label
-import javafx.scene.control.TextField
+import javafx.scene.control.*
+
 import java.time.format.DateTimeFormatter
 
 class Controller {
@@ -17,6 +15,8 @@ class Controller {
     lateinit var textMsisdn: TextField
     @FXML
     lateinit var welcomeLabel: Label
+    @FXML
+    lateinit var operatorName: Label
     @FXML
     lateinit var textMsisdnB: TextField
     @FXML
@@ -40,8 +40,8 @@ class Controller {
                     if (chUrgency.isSelected) "1," else "0," + if (chUrgency.isSelected) "1" else "0"
             //convert.arrayFormater(unparsedData, welcomeLabel)
             welcomeLabel.text = data
-            val export: ExportToCSV = ExportToCSV()
-            export.createCSV(data)
+            val export = ExportToCSV()
+            export.createCSV(data, operatorName.text)
         }
     }
 
@@ -53,6 +53,12 @@ class Controller {
         replaceDigit(textDuration)
     }
 
+    //данный метод запускается после загрузки fxml
+    @FXML
+    fun initialize() {
+        showOperatorDialog()
+    }
+
     // вызов проверки правильности введеной информации
     private fun checkField(): Boolean {
         val error =
@@ -62,6 +68,26 @@ class Controller {
         } else { // вывод ошибки
             welcomeLabel.text = error.textError
             false
+        }
+    }
+
+    private fun showOperatorDialog(): TextInputDialog? {
+        val dialog = TextInputDialog()
+        dialog.headerText = "Enter you name"
+        val result = dialog.showAndWait()
+        result.ifPresent { name: String -> setOperatorName(name) }
+        if (result.isPresent) {
+            return dialog
+        } else {
+            return showOperatorDialog()
+        }
+    }
+
+    private fun setOperatorName(name: String) {
+        if (!name.isEmpty()) {
+            operatorName.text = name
+        } else {
+            showOperatorDialog()
         }
     }
 }

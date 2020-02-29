@@ -9,9 +9,8 @@ import java.util.*
 
 class ExportToCSV {
 
-    fun createCSV (data: String){
+    fun createCSV(data: String, operator: String) {
         val dateFormater = SimpleDateFormat("ddMMYYYY_HHmm")
-        val operator = "pashaka"
         val fileName = "${operator}_${dateFormater.format(Calendar.getInstance().time)}.csv"
         val filePath = "/Users/livehocok/Documents/$fileName"
         val writer = Files.newBufferedWriter(Paths.get(filePath))

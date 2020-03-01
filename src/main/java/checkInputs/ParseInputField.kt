@@ -1,12 +1,13 @@
 package checkInputs;
 
-import javafx.scene.control.TextField
+class ParseInputField {
 
-class ParceInputField {
-
-    fun replaceDigit(text: TextField) {
-        text.setText(text.getText().replace("[^\\d]".toRegex(), ""))
-        text.positionCaret(text.getText().length)
+    fun replaceDigit(oldText: String, newText: String): String {
+        when {
+            newText.length > oldText.length && newText.matches("^\\d+$".toRegex()) -> return newText
+            newText.length > oldText.length && !newText.matches("^\\d+$".toRegex())-> return oldText
+        }
+        return newText
     }
 
     fun parseTime(oldText: String, newText: String): String {

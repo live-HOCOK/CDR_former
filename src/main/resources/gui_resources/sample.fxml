@@ -11,11 +11,11 @@
 
     <Label GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="welcomeLabel"/>
     <Label GridPane.rowIndex="1" GridPane.columnIndex="2" fx:id="operatorName"/>
-    <TextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="textMsisdn" onKeyTyped="#replaceDigit"/>
-    <TextField GridPane.rowIndex="2" GridPane.columnIndex="2" fx:id="textMsisdnB" onKeyTyped="#replaceDigit"/>
+    <TextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="textMsisdn"/>
+    <TextField GridPane.rowIndex="2" GridPane.columnIndex="2" fx:id="textMsisdnB"/>
     <DatePicker GridPane.rowIndex="2" GridPane.columnIndex="3" fx:id="dateStarDate" editable="false"/>
     <TextField GridPane.rowIndex="2" GridPane.columnIndex="4" fx:id="textStartTime"/>
-    <TextField GridPane.rowIndex="2" GridPane.columnIndex="5" fx:id="textDuration" onKeyTyped="#replaceDigit"/>
+    <TextField GridPane.rowIndex="2" GridPane.columnIndex="5" fx:id="textDuration"/>
     <CheckBox GridPane.rowIndex="3" GridPane.columnIndex="3" fx:id="chPlusMinute"/>
     <CheckBox GridPane.rowIndex="3" GridPane.columnIndex="4" fx:id="chUrgency"/>
     <Button GridPane.rowIndex="4" GridPane.columnIndex="3" onAction="#buttonClick"

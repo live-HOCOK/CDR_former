@@ -12,10 +12,10 @@
         </File>
     </Appenders>
     <Loggers>
-        <Logger name="FileLogger" level="DEBUG" additivity="false">
+        <Logger name="FileLogger" level="INFO" additivity="false">
             <AppenderRef ref="LogToFile"/>
         </Logger>
-        <Logger name="ConsoleLogger" level="DEBUG" additivity="false">
+        <Logger name="ConsoleLogger" level="INFO" additivity="false">
             <AppenderRef ref="LogToConsole"/>
         </Logger>
 

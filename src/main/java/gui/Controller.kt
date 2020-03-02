@@ -3,11 +3,13 @@ package gui
 import checkInputs.CheckInput
 import checkInputs.InputError
 import checkInputs.ParseInputField
+import common.Loggers
 import exporter.ExportToCSV
 import javafx.application.Platform
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.*
+import org.apache.logging.log4j.Logger
 
 import java.time.format.DateTimeFormatter
 
@@ -32,6 +34,10 @@ class Controller {
     lateinit var chUrgency: CheckBox
 
     private val parse = ParseInputField()
+
+    companion object {
+        val logger: Logger = Loggers.fileLogger
+    }
 
     // метод выполняющийся при нажатии на кнопку
     @FXML
@@ -94,6 +100,7 @@ class Controller {
     private fun showOperatorDialog(): TextInputDialog? {
         val dialog = TextInputDialog()
         dialog.headerText = "Enter you name"
+        logger.debug("showOperatorDialog")
         val result = dialog.showAndWait()
         result.ifPresent { name: String -> setOperatorName(name) }
         return if (result.isPresent) {

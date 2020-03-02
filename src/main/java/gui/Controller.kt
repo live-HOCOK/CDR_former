@@ -10,6 +10,7 @@ import javafx.fxml.FXML
 import javafx.scene.control.*
 
 import java.time.format.DateTimeFormatter
+import kotlin.system.exitProcess
 
 class Controller {
     @FXML
@@ -99,7 +100,7 @@ class Controller {
         return if (result.isPresent) {
             dialog
         } else {
-            showOperatorDialog()
+            exitProcess(-1)
         }
     }
 

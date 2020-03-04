@@ -113,7 +113,7 @@ class Controller {
 
     private fun setOperatorName(name: String) {
         if (name.isNotEmpty()) {
-            operatorName.text = name
+            operatorName.text += name
         } else {
             showOperatorDialog()
         }

@@ -24,25 +24,26 @@ class CheckInput () {
         }
     }
 
+    //check msisdn on lenght
     fun checkMsisdn(msisdn: String): Boolean {
         return msisdn.length != 9
     }
 
+    //check msisdn prefix
     fun checkMsisdnPrefix(msisdn: String): Boolean {
-        return try {
-            FilialPrefix.valueOf(("P" + msisdn[0].toString() + msisdn[1].toString())) == null
-        } catch (e: RuntimeException){
-            true
-        }
-
+        val filialPrefix = FilialPrefix()
+        return !filialPrefix.prefixList.contains(prefixOfMsisdn(msisdn))
     }
+
+    //get prefix on full msisdn
+    fun prefixOfMsisdn(msisdn: String): String {return msisdn.substring(0,2)}
 
     fun checkMsisdnB(msisdnB: String): Boolean {
         return msisdnB.length != 9 && msisdnB.length != 13
     }
 
     fun checkStarTime(startTime: String): Boolean{
-        val regex = "((^[0-1]\\d)|(^2[1-3]))[:,.,,,/][0-5]\\d([:,.,,,/][0-5]\\d)?$".toRegex()
+        val regex = "((^[0-1]\\d)|(^2[1-3])):[0-5]\\d:[0-5]\\d$".toRegex()
         return regex.find(startTime) == null
     }
 }

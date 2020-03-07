@@ -47,7 +47,7 @@ class Controller {
             val data: String = "${textMsisdn.text},${textMsisdnB.text}," +
                     dateStarDate.value.format(DateTimeFormatter.ofPattern("dd.MM.YYYY")) +
                     ",${textStartTime.text},${textDuration.text},${if (chPlusMinute.isSelected) "1" else "0"}," +
-                    if (chUrgency.isSelected) "1," else "0," + if (chUrgency.isSelected) "1" else "0"
+                    if (chUrgency.isSelected) "1" else "0"
             welcomeLabel.text = data //debug
             val export = ExportToCSV()
             export.createCSV(data, operatorName.text)

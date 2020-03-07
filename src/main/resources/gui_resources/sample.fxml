@@ -6,13 +6,13 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
 <GridPane alignment="center" hgap="10.0" minHeight="200.0" minWidth="800.0" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller">
 
-    <Label fx:id="welcomeLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
     <Label fx:id="operatorName" alignment="TOP_RIGHT" contentDisplay="RIGHT" text="Вы вошли как: " textAlignment="RIGHT" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
       <GridPane.margin>
          <Insets right="7.0" />
@@ -39,7 +39,7 @@
       <GridPane.margin>
          <Insets right="10.0" />
       </GridPane.margin></TextField>
-    <CheckBox fx:id="chPlusMinute" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+    <CheckBox fx:id="chPlusMinute" selected="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
       <graphic>
          <Label text="Добавить минуту&#10;к стоимости" textAlignment="CENTER">
             <padding>
@@ -55,7 +55,10 @@
             </padding>
          </Label>
       </graphic></CheckBox>
-    <Button alignment="CENTER" onAction="#buttonClick" text="Form CSV" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+    <Button fx:id="buttonForm" alignment="CENTER" onAction="#buttonClick" text="Form CSV" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+      <tooltip>
+         <Tooltip fx:id="tooltipButton" text="Сформировать CSV" />
+      </tooltip></Button>
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />

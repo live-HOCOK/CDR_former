@@ -9,6 +9,7 @@ import javafx.application.Platform
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.*
+import javafx.stage.StageStyle
 import org.apache.logging.log4j.Logger
 
 import java.time.format.DateTimeFormatter
@@ -100,6 +101,7 @@ class Controller {
 
     private fun showOperatorDialog(): TextInputDialog? {
         val dialog = TextInputDialog()
+        dialog.graphic = null
         dialog.headerText = "Enter you name"
         logger.debug("showOperatorDialog")
         val result = dialog.showAndWait()

@@ -16,7 +16,11 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("gui_resources/sample.fxml"));
         primaryStage.setTitle("CDR former");
-        primaryStage.setScene(new Scene(root, 900, 275));
+        primaryStage.setScene(new Scene(root));
+        primaryStage.setMaxHeight(300);
+        primaryStage.setMinHeight(200);
+        primaryStage.setMaxWidth(1000);
+        primaryStage.setMinWidth(800);
         primaryStage.show();
     }
 

@@ -48,11 +48,14 @@ class Controller {
 
     // метод выполняющийся при нажатии на кнопку
     @FXML
-    fun buttonClick(actionEvent: ActionEvent?) { // выполняем проверку, если хорошо то передаем на конвертацию текста
+    fun buttonClick() { // выполняем проверку, если хорошо то передаем на конвертацию текста
         if (checkField()) {
             val data: String = "${textMsisdn.text},${textMsisdnB.text}," +
                     dateStarDate.value.format(DateTimeFormatter.ofPattern("dd.MM.YYYY")) +
-                    ",${textStartTime.text.replace(":",".")},${textDuration.text},${if (chPlusMinute.isSelected) "1" else "0"}," +
+                    ",${textStartTime.text.replace(
+                        ":",
+                        "."
+                    )},${textDuration.text},${if (chPlusMinute.isSelected) "1" else "0"}," +
                     if (chUrgency.isSelected) "1," else "0," + if (chUrgency.isSelected) "1" else "0"
             export.createCSV(data)
         }

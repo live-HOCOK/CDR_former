@@ -6,44 +6,64 @@ import checkInputs.InputError.*
 import java.lang.RuntimeException
 
 
-class CheckInput () {
+class CheckInput() {
+    val arrayError = HashSet<InputError>()
+        get() = field
 
-    // проверка на возможные ошибки
-    fun checkField(msisdn: TextField, msisdnB: TextField, date: DatePicker, time: TextField, duration: TextField): InputError {
-        return when {
-            msisdn.text.isEmpty() -> NO_MSISDN
-            msisdnB.text.isEmpty() -> NO_MSISDN_B
-            date.value == null -> NO_DATE
-            time.text.isEmpty() -> NO_TIME
-            duration.text.isEmpty() -> NO_DURATION
-            checkMsisdn(msisdn.text) -> INCORRECT_MSISDN
-            checkMsisdnB(msisdnB.text) -> INCORRECT_MSISDN_B
-            checkStarTime(time.text) -> INCORRECT_START_TIME
-            checkMsisdnPrefix(msisdn.text) -> INCORRECT_PREFIX
-            else -> NO_ERROR
-        }
-    }
-
-    //check msisdn on lenght
-    fun checkMsisdn(msisdn: String): Boolean {
-        return msisdn.length != 9
-    }
-
-    //check msisdn prefix
-    fun checkMsisdnPrefix(msisdn: String): Boolean {
+    //check msisdn
+    fun checkMsisdn(msisdn: TextField) {
         val filialPrefix = FilialPrefix()
-        return !filialPrefix.prefixList.contains(prefixOfMsisdn(msisdn))
+        if (msisdn.text.isNotEmpty()) { //on null
+            arrayError.remove(NO_MSISDN)
+            if (msisdn.length == 9) //on length
+                arrayError.remove(INCORRECT_MSISDN)
+            else arrayError.add(INCORRECT_MSISDN)
+            if (filialPrefix.prefixList.contains(prefixOfMsisdn(msisdn.text))) //on prefix
+                arrayError.remove((INCORRECT_PREFIX))
+            else arrayError.add(INCORRECT_PREFIX)
+        } else arrayError.add(NO_MSISDN)
     }
 
     //get prefix on full msisdn
-    fun prefixOfMsisdn(msisdn: String): String {return msisdn.substring(0,2)}
-
-    fun checkMsisdnB(msisdnB: String): Boolean {
-        return msisdnB.length != 9 && msisdnB.length != 13
+    fun prefixOfMsisdn(msisdn: String): String {
+        return if (msisdn.length > 2) msisdn.substring(0, 2) else msisdn
     }
 
-    fun checkStarTime(startTime: String): Boolean{
+    fun checkMsisdnB(msisdnB: TextField) {
+        if (msisdnB.text.isNotEmpty()) {
+            arrayError.remove(NO_MSISDN_B)
+            if (msisdnB.length == 9 || msisdnB.length == 13)
+                arrayError.remove(INCORRECT_MSISDN_B)
+            else arrayError.add((INCORRECT_MSISDN_B))
+        } else arrayError.add(NO_MSISDN_B)
+    }
+
+    fun checkDate(date: DatePicker) {
+        if (date.value != null) arrayError.remove(NO_DATE)
+            else arrayError.add(NO_DATE)
+    }
+
+    fun checkStarTime(startTime: TextField) {
         val regex = "((^[0-1]\\d)|(^2[1-3])):[0-5]\\d:[0-5]\\d$".toRegex()
-        return regex.find(startTime) == null
+        if (startTime.text.isNotEmpty()) {
+            arrayError.remove(NO_TIME)
+            if (regex.find(startTime.text) != null) arrayError.remove(INCORRECT_START_TIME)
+                else arrayError.add(INCORRECT_START_TIME)
+        } else arrayError.add(NO_TIME)
+    }
+
+    fun checkDuration(duration: TextField) {
+        if (duration.text.isNotEmpty())
+            arrayError.remove(NO_DURATION)
+        else
+            arrayError.add((NO_DURATION))
+    }
+
+    fun checkAll (msisdn: TextField, msisdnB: TextField, date: DatePicker, startTime: TextField, duration: TextField) {
+        checkMsisdn(msisdn)
+        checkMsisdnB(msisdnB)
+        checkDate(date)
+        checkStarTime(startTime)
+        checkDuration(duration)
     }
 }

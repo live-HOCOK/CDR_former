@@ -48,7 +48,7 @@ class Controller {
 
     // метод выполняющийся при нажатии на кнопку
     @FXML
-    fun buttonClick(actionEvent: ActionEvent?) { // выполняем проверку, если хорошо то передаем на конвертацию текста
+    fun buttonClick() { // выполняем проверку, если хорошо то передаем на конвертацию текста
         if (checkField()) {
             val data: String = "${textMsisdn.text},${textMsisdnB.text}," +
                     dateStarDate.value.format(DateTimeFormatter.ofPattern("dd.MM.YYYY")) +

@@ -1,21 +1,78 @@
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.CheckBox?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<GridPane xmlns:fx="http://javafx.com/fxml"
-          fx:controller="gui.Controller"
-          alignment="center" hgap="10" vgap="10" >
-    <Label GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="welcomeLabel"/>
-    <TextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="textMsisdn" onKeyTyped="#replaceDigit"/>
-    <TextField GridPane.rowIndex="2" GridPane.columnIndex="2" fx:id="textMsisdnB" onKeyTyped="#replaceDigit"/>
-    <DatePicker GridPane.rowIndex="2" GridPane.columnIndex="3" fx:id="dateStarDate" editable="false"/>
-    <TextField GridPane.rowIndex="2" GridPane.columnIndex="4" fx:id="textStartTime"/>
-    <TextField GridPane.rowIndex="2" GridPane.columnIndex="5" fx:id="textDuration" onKeyTyped="#replaceDigit"/>
-    <CheckBox GridPane.rowIndex="3" GridPane.columnIndex="3" fx:id="chPlusMinute"/>
-    <CheckBox GridPane.rowIndex="3" GridPane.columnIndex="4" fx:id="chUrgency"/>
-    <Button GridPane.rowIndex="4" GridPane.columnIndex="3" onAction="#buttonClick"
-            text="Form CSV" alignment="CENTER" GridPane.halignment="CENTER" textAlignment="CENTER"/>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="center" hgap="10.0" minHeight="200.0" minWidth="800.0" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller">
+
+    <Label fx:id="operatorName" alignment="TOP_RIGHT" contentDisplay="RIGHT" text="Вы вошли как: " textAlignment="RIGHT" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+      <GridPane.margin>
+         <Insets right="7.0" />
+      </GridPane.margin>
+      <padding>
+         <Insets right="10.0" />
+      </padding></Label>
+   <Label text="Абонент A" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+   <Label text="Абонент B" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+   <Label text="Дата вызова" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+   <Label text="Время вызова" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+   <Label text="Длительность вызова&#10;(в мин.)" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+      <GridPane.margin>
+         <Insets />
+      </GridPane.margin>
+      <padding>
+         <Insets right="10.0" />
+      </padding></Label>
+    <TextField fx:id="textMsisdn" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <TextField fx:id="textMsisdnB" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+    <DatePicker fx:id="dateStarDate" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+    <TextField fx:id="textStartTime" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+    <TextField fx:id="textDuration" GridPane.columnIndex="5" GridPane.rowIndex="3">
+      <GridPane.margin>
+         <Insets right="10.0" />
+      </GridPane.margin></TextField>
+    <CheckBox fx:id="chPlusMinute" selected="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+      <graphic>
+         <Label text="Добавить минуту&#10;к стоимости" textAlignment="CENTER">
+            <padding>
+               <Insets left="5.0" />
+            </padding>
+         </Label>
+      </graphic></CheckBox>
+    <CheckBox fx:id="chUrgency" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+      <graphic>
+         <Label text="Срочно" textAlignment="CENTER">
+            <padding>
+               <Insets left="5.0" />
+            </padding>
+         </Label>
+      </graphic></CheckBox>
+    <Button fx:id="buttonForm" alignment="CENTER" onAction="#buttonClick" text="Form CSV" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+      <tooltip>
+         <Tooltip fx:id="tooltipButton" text="Сформировать CSV" />
+      </tooltip></Button>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
 </GridPane>
